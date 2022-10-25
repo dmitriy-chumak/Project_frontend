@@ -6,17 +6,11 @@ const headers = {
 };
 
 const validationString = (text) => {
-  if (text.trim() === '') {
-    return false;
-  }
-  return true;
+  return (text.trim() !== '');
 }
 
 const validationSpend = (num) => {
-  if (Number(num) < 1) {
-    return false;
-  }
-  return true;
+  return (Number(num) > 1 && num.trim() !== '');
 }
 
 window.onload = () => {
@@ -45,11 +39,8 @@ const addCost = async () => {
       return;
     }
 
-    if (!validationString(inputName.value) 
-    || !validationString(inputNumber.value) 
-    || !validationSpend(inputNumber.value)
-    ) {
-      printError('Bad validation');
+    if (!validationString(inputName.value) || !validationSpend(inputNumber.value)) {
+      printError('Incorrect input data. Please rewrite');
       return;
     }
 
@@ -96,7 +87,7 @@ const render = () => {
     listItem.classList = 'list-item';
     const container = document.createElement('div');
     container.classList = 'list-item__container';
-    container.id = `container${index}`;
+    container.id = `container${id}`;
 
     const nameShop = document.createElement('p');
     nameShop.classList = 'text list-item__name';
@@ -156,7 +147,7 @@ const render = () => {
   sum.innerText = sumprice;
 }
 
-const deleteCast = async (id) => {
+const deleteCost = async (id) => {
   try {  
     const response = await fetch(`${localhost}/${id}`, {
       method: 'DELETE'
@@ -171,24 +162,22 @@ const deleteCast = async (id) => {
     render();
   } catch (error) {
     printError('Error delete');
-    return;
   }
 }
 
 const changeCost = (id) => {
-  const index = allCosts.findIndex(element => element._id === id);
-  const changeContainer = document.getElementById(`container${index}`);
-  changeContainer.classList = 'change-container';
+  const changeContainer = document.getElementById(`container${id}`);
+
   if (changeContainer === null) {
     return;
   }
+  changeContainer.classList = 'change-container';
 
   while (changeContainer.firstChild) {
     changeContainer.removeChild(changeContainer.firstChild);
   }
 
   const { name, spend, date } = allCosts.find(element => element._id === id);
-  
 
   const inputChangeName = document.createElement('input');
   inputChangeName.type = 'text';
@@ -214,11 +203,10 @@ const changeCost = (id) => {
   imageConfirm.alt = 'Confirm';
   buttonConfirm.onclick = () => {
     if (!validationString(inputChangeName.value) 
-    || !validationString(inputChangeDate.value) 
-    || !validationString(inputChangeValue.value)
-    || !validationSpend(inputChangeValue.value)
+      || !validationString(inputChangeDate.value) 
+      || !validationSpend(inputChangeValue.value)
     ) {
-      printError('Bad validation');
+      printError('Incorect change data.');
       return;
     }
     confirmChange(id, inputChangeName.value, inputChangeDate.value, inputChangeValue.value);
@@ -264,9 +252,12 @@ const confirmChange = async (id, name, date, spend) => {
       throw new Error();
     }
 
-    const index = allCosts.findIndex(element => element._id === id);
-    allCosts[index] = result;
-    render()
+    allCosts.forEach(element => {
+      if (element._id === result._id) {
+        element = result;
+      }
+    });
+    render();
   } catch (error) {
     printError('Error confirm change');
   }
@@ -274,6 +265,7 @@ const confirmChange = async (id, name, date, spend) => {
 
 const printError = (text) => {
   const errorBox = document.getElementById('error-box');
+
   if (errorBox === null) {
     return;
   }
