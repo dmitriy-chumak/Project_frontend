@@ -54,9 +54,8 @@ const addCost = async () => {
     });
     const result = await response.json();
 
-    if (result.message) {
-      printError(result.message);
-      return;
+    if (!result._id) {
+      throw new Error();
     }
 
     allCosts.push(result);
