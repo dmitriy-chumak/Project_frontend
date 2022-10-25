@@ -254,7 +254,7 @@ const confirmChange = async (id, name, date, spend) => {
       body: JSON.stringify({
         name: name,
         date: date,
-        spend: spend
+        spend: Number(spend)
       }),
     });
 
