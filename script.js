@@ -10,7 +10,7 @@ const validationString = (text) => {
 }
 
 const validationSpend = (num) => {
-  return (Number(num) > 1 && num.trim() !== '');
+  return (Number(num) > 1);
 }
 
 window.onload = () => {
@@ -80,7 +80,7 @@ const render = () => {
 
   printError('');
   const copyCosts = [...allCosts];
-  copyCosts.forEach((element, index) => {
+  copyCosts.forEach(element => {
     const { name, date, spend, _id: id } = element;
     const listItem = document.createElement('li');
     listItem.classList = 'list-item';
@@ -125,7 +125,7 @@ const render = () => {
     deleteImg.alt = 'Delete';
     deleteButton.appendChild(deleteImg);
     deleteButton.onclick = () => {
-      deleteCast(id);
+      deleteCost(id);
     }
 
     const buttons = document.createElement('div');
@@ -140,10 +140,10 @@ const render = () => {
   });
 
   const sum = document.getElementById('sum-costs');
-  const sumprice = allCosts.reduce((memo, num) => {
+  const sumPrice = allCosts.reduce((memo, num) => {
     return (memo + Number(num.spend))
   }, 0);
-  sum.innerText = sumprice;
+  sum.innerText = sumPrice;
 }
 
 const deleteCost = async (id) => {
@@ -201,13 +201,6 @@ const changeCost = (id) => {
   imageConfirm.src = './image/check.svg';
   imageConfirm.alt = 'Confirm';
   buttonConfirm.onclick = () => {
-    if (!validationString(inputChangeName.value) 
-      || !validationString(inputChangeDate.value) 
-      || !validationSpend(inputChangeValue.value)
-    ) {
-      printError('Incorect change data.');
-      return;
-    }
     confirmChange(id, inputChangeName.value, inputChangeDate.value, inputChangeValue.value);
   }
 
@@ -234,6 +227,14 @@ const changeCost = (id) => {
 }
 
 const confirmChange = async (id, name, date, spend) => {
+  if (!validationString(name) 
+    || !validationString(date) 
+    || !validationSpend(spend)
+  ) {
+    printError('Incorect change data.');
+    return;
+  }
+
   try {
     const response = await fetch(`${localhost}/${id}`, {
       method: 'PATCH',
