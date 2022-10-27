@@ -176,6 +176,11 @@
     width: 150px;
   }
 
+  .button__image {
+    height: 100%;
+    width: 100%;
+  }
+
   .list-item__container {
     justify-content: space-between;
   }
@@ -196,7 +201,7 @@
   }
 
   .list-item__buttons {
-    width: auto;
+    width: 15%;
   }
 
   .change-container {
