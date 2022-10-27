@@ -143,7 +143,7 @@ const render = () => {
   const sumPrice = allCosts.reduce((memo, num) => {
     return (memo + Number(num.spend))
   }, 0);
-  sum.innerText = sumPrice;
+  sum.innerText = `Итого: ${sumPrice} p.`;
 }
 
 const deleteCost = async (id) => {

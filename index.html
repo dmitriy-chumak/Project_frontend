@@ -14,20 +14,31 @@
         <div class="add-cost">
           <div class="add-cost__enter">
             <h4 class="add-cost__header">Куда было потрачено:</h4>
-            <input type="text" placeholder="Куда было потрачено" class="add-cost__input add-cost__input_text" id="input-name">
+            <input 
+              type="text" 
+              placeholder="Куда было потрачено" 
+              class="add-cost__input add-cost__input_text" 
+              id="input-name"
+            >
           </div>
           <div class="add-cost__enter">
             <h4 class="add-cost__header">Сколько было потрачено:</h4>
-            <input type="number" placeholder="Сколько было потрачено" min="1" class="add-cost__input add-cost__input-number" id="input-number">
+            <input 
+              type="number" 
+              placeholder="Сколько было потрачено" 
+              min="1" 
+              class="add-cost__input add-cost__input-number" 
+              id="input-number"
+            >
           </div>
-          <button class="add-cost__button" onclick="addCost()">Добавить</button>
+          <button type="button" class="add-cost__button" onclick="addCost()">Добавить</button>
         </div>
         <div class="output">
           <div class="output__error">
             <p class="error" id="error-box"></p>
           </div>
           <div class="output__sum">
-            <p class="output__sum_text">Итого:&nbsp;<p class="output__sum_text" id="sum-costs"></p>&nbsp;p.</p>
+            <p class="output__sum_text" id="sum-costs"></p>
           </div>
         </div>
       </div>

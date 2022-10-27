@@ -28,6 +28,9 @@
 .add-cost {
   display: flex;
   flex-direction: row;
+  justify-content: space-around;
+  width: 100%;
+  min-width: 770px;
   margin-top: 20px;
 }
 
@@ -46,24 +49,25 @@
 }
 
 .add-cost__input {
-  height: 25px;
-  padding: 5px;
+  height: 100%;
+  padding: 10px;
   border-radius: 5px;
   border: 1px solid black;
-  width: 200px;
 }
 
 .add-cost__input_text {
-  width: 400px;
+  width: 100%;
+  min-width: 400px;
 }
 
 .add-cost__button {
-  height: 35px;
-  padding: 5px;
+  height: 100%;
+  padding: 10px;
   border: 1px solid transparent;
   border-radius: 5px;
   background-color: #6fcbac;
   align-self: flex-end;
+  margin-left: 5px;
 }
 
 .output {
@@ -156,6 +160,9 @@
 
   .add-cost {
     flex-direction: column;
+    width: 100%;
+    min-width: 0;
+    max-width: 700px;
   }
 
   .add-cost__header {
@@ -167,8 +174,11 @@
   }
 
   .add-cost__input {
-    width: 460px;
     margin-right: 0;
+  }
+
+  .add-cost__input_text {
+    width: 95%;
   }
 
   .add-cost__button {
@@ -210,6 +220,6 @@
   }
 
   .input-change {
-    width: 250px;
+    width: 40%;
   }
 }
