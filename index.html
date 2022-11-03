@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="main-div">
+      <div class="header-block">
+        <h1 class="header">Учёт моих расходов</h1>
+        <div class="add-cost">
+          <div class="add-cost__enter">
+            <h4 class="add-cost__header">Куда было потрачено:</h4>
+            <input 
+              type="text" 
+              placeholder="Куда было потрачено" 
+              class="add-cost__input add-cost__input_text" 
+              id="input-name"
+            >
+          </div>
+          <div class="add-cost__enter">
+            <h4 class="add-cost__header">Сколько было потрачено:</h4>
+            <input 
+              type="number" 
+              placeholder="Сколько было потрачено" 
+              min="1" 
+              class="add-cost__input add-cost__input-number" 
+              id="input-number"
+            >
+          </div>
+          <button type="button" class="add-cost__button" onclick="addCost()">Добавить</button>
+        </div>
+        <div class="output">
+          <div class="output__error">
+            <p class="error" id="error-box"></p>
+          </div>
+          <div class="output__sum">
+            <p class="output__sum_text" id="sum-costs"></p>
+          </div>
+        </div>
+      </div>
+      <ol class="container" id="container-costs"></ol>
+    </div>
+  </body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+  <script src="./script.js"></script>
+</html>
